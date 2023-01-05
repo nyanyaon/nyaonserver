@@ -1,8 +1,8 @@
 import { Server } from "./deps.ts";
 import { contentType } from "https://deno.land/std@0.170.0/media_types/mod.ts";
 
-const port = 4505;
-const HOST: string = "http://localhost:" + port;
+const port = 80;
+const HOST = `http://localhost${port === 80 ? "" : ":" + port}`;
 const handler = (request: Request) => {
   const base = request.url.replace(HOST, "");
   if (base === "/") {

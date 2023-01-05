@@ -1,10 +1,10 @@
 version: '3.4'
 
 services:
-  landsaleweb:
-    image: landsaleweb
+  nyanyaonweb:
+    image: nyanyaonweb
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - 4505:4505
+      - 80:80
