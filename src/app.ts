@@ -7,7 +7,6 @@ const handler = (request: Request) => {
   // const base = request.url.replace(HOST, "");
   const base = new URL(request.url);
   const path = base.pathname;
-  console.log(path);
   if (path === "/") {
     const body = Deno.readTextFileSync("./public/index.html");
     return new Response(body, {
