@@ -18,7 +18,7 @@ const handler = (request: Request) => {
   }
 
   const file_type: string = path.slice(path.indexOf("."), path.length);
-  return new Response(Deno.readTextFileSync("./public/" + path), {
+  return new Response(Deno.readFileSync("./public" + path), {
     status: 200,
     headers: {
       "content-type": contentType(file_type) as string,
