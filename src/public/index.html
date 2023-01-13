@@ -44,11 +44,13 @@
           <p id="loc"></p>
         </section>
         <section id="projects">
-          <h2>MY PROJECTS</h2>
+          <h2>PROJECTS</h2>
           <div class="list-project">
             <div class="box">
-              <img src="/img/sidarta_logo.png" alt="logo sidarta">
-              <h3>SIDARTA</h3>
+              <a href="https://sidarta.nyanyaon.my.id/">
+                <img src="/img/sidarta_logo.png" alt="logo sidarta">
+                <h3>SIDARTA</h3>
+              </a>
             </div>
             <div class="box">
 
@@ -91,7 +93,35 @@
       L.circle(e.latlng, radius).addTo(map);
     }
 
+    var listPoint = [];
+    var listObjectPoint = [];
+    var polygon = null;
+    var id = 1;
+    function onClick(e) {
+      if (polygon !== null) {
+        polygon.remove();
+      }
+      listPoint.push(e.latlng);
+      var point = L.marker(e.latlng).addTo(map)
+        .bindPopup("You click here").openPopup();
+      listObjectPoint.push(point);
+      if (listPoint.length > 2) {
+        polygon = L.polygon(listPoint, { color: 'red' }).addTo(map).bindPopup("left click to save").openPopup();
+        polygon.on('contextmenu', () => {
+          listPoint = [];
+          listObjectPoint.forEach(obj => {
+            obj.remove();
+          })
+
+          polygon.bindPopup("saved with id " + id++).openPopup();
+          polygon = null;
+        }).once('click', onClick);
+      }
+    }
+
     map.on('locationfound', onLocationFound);
+
+    map.on('click', onClick)
 
     map.locate({ setView: true, maxZoom: 18 });
   </script>
