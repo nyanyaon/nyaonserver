@@ -44,7 +44,7 @@ h2 {
 }
 
 #porto-about {
-    margin: 4em;
+    margin: 2em;
     display: flex;
     flex-direction: column;
 }
@@ -60,6 +60,7 @@ h2 {
     margin-top: 1em;
 }
 
+
 .box {
     width: 80px;
     height: 80px;
@@ -67,15 +68,33 @@ h2 {
     margin-left: auto;
     text-align: center;
     background: linear-gradient(white, white) padding-box,
-        linear-gradient(to right, #0D83C6, #84FF82) border-box;
+        linear-gradient(to right, #494949, #c2c2c2) border-box;
     border-radius: 50%;
     border: 2px solid transparent;
+    transition: all 0.5s ease-out;
     padding: .75em;
+    z-index: 1;
 }
 
 .box:hover {
+    transform: scale(1);
     background: linear-gradient(white, white) padding-box,
-        linear-gradient(to left, #0D83C6, #84FF82) border-box;
+        linear-gradient(to right, #0D83C6, #84FF82) border-box;
+}
+
+.box img {
+    transition: all 0.5s ease-out;
+    filter: grayscale(100%) blur(0.5px);
+}
+
+.box:hover img {
+    transform: scale(1) rotate(360deg);
+    filter: grayscale(0) blur(0);
+}
+
+.box a {
+    color: #0D83C6;
+    text-decoration: none !important;
 }
 
 img {
@@ -88,7 +107,7 @@ img {
 }
 
 #content p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     word-wrap: break-word;
 
 }
@@ -109,8 +128,8 @@ img {
 .social-media a {
     color: #000;
     font-size: 3em;
-    margin-right: 1em;
-    margin-left: 1em;
+    margin-right: 0.25em;
+    margin-left: 0.25em;
 }
 
 .social-media a:hover {

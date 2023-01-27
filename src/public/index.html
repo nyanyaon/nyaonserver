@@ -40,8 +40,7 @@
       </section>
       <section id="body">
         <section id="content">
-          <p>Hi, I'm enthusiast in geospatial and data science</p>
-          <p id="loc"></p>
+          <p>Hi, I'm enthusiast in <b>Geospatial</b> and <b>Data Science</b></p>
         </section>
         <section id="projects">
           <h2>PROJECTS</h2>
@@ -49,7 +48,6 @@
             <div class="box">
               <a href="https://sidarta.nyanyaon.my.id/">
                 <img src="/img/sidarta_logo.png" alt="logo sidarta">
-                <h3>SIDARTA</h3>
               </a>
             </div>
             <div class="box">
@@ -65,6 +63,7 @@
         <p>© Copyright 2022 Nyanyaon made with ❤️</p>
         <div class="social-media">
           <a href="https://instagram.com/ahmaddkh_"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://github.com/nyanyaon"><i class="fa-brands fa-github"></i></a>
         </div>
       </section>
     </section>
@@ -82,10 +81,7 @@
     var popup = L.popup();
 
     function onLocationFound(e) {
-      let locEl = document.getElementById("loc");
       var radius = e.accuracy;
-
-      locEl.textContent = `You're location at ${e.latlng.lat}, ${e.latlng.lng}`;
 
       L.marker(e.latlng).addTo(map)
         .bindPopup("You are within " + radius + " meters from this point").openPopup();
@@ -94,32 +90,19 @@
     }
 
     var listPoint = [];
-    var listObjectPoint = [];
-    var polygon = null;
     var id = 1;
     function onClick(e) {
-      if (polygon !== null) {
-        polygon.remove();
-      }
       listPoint.push(e.latlng);
       var point = L.marker(e.latlng).addTo(map)
         .bindPopup("You click here").openPopup();
-      listObjectPoint.push(point);
-      if (listPoint.length > 2) {
-        polygon = L.polygon(listPoint, { color: 'red' }).addTo(map).bindPopup("left click to save").openPopup();
-        polygon.on('contextmenu', () => {
-          listPoint = [];
-          listObjectPoint.forEach(obj => {
-            obj.remove();
-          })
-
-          polygon.bindPopup("saved with id " + id++).openPopup();
-          polygon = null;
-        }).once('click', onClick);
-      }
     }
 
     map.on('locationfound', onLocationFound);
+
+    navigator.geolocation.getCurrentPosition((e) => {
+      let radius = e.coords.accuracy;
+      console.log(radius);
+    });
 
     map.on('click', onClick)
 
